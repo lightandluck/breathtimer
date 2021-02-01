@@ -1,11 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
 import BreathCounter from './components/BreathCounter'
+import Stopwatch from './components/Stopwatch'
+import Countdown from './components/Countdown'
 
 function App() {
   return (
     <div className="container">
-      <BreathCounter />
+      {/* <BreathCounter maxBreaths={40}/> */}
+      {/* <Stopwatch /> */}
+      <Countdown />
     </div>
   );
 }

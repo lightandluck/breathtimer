@@ -1,21 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './BreathCounter.css'
-const BreathCounter = () => {
+import useInterval from '../hooks/useInterval'
 
-  const [count, setCount] = useState(1)
+const BreathCounter = ({ maxBreaths }) => {
 
-  useEffect(() => {
-    let id = setInterval(() => {
-      setCount(count + 1);
-    }, 4000);
+  const [count, setCount] = useState(1) 
 
-    return () => {
-      if (count > 39) {
-        clearInterval(id);
-      }
-    }
-  })
-
+  useInterval(() => {      
+    setCount(count + 1);  
+  }, (count > maxBreaths-1) ? null : 3500); // Stops interval after maxBreaths
+    
   return (
     <div className="bubble">
       <p className="counter">{count}</p>

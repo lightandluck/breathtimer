@@ -14,7 +14,7 @@
 }
 
 .bubble {
-  animation-duration: 4s;
+  animation-duration: 3500ms;
   animation-name: breath;
   animation-iteration-count: infinite;
 }

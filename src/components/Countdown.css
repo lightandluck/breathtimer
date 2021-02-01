@@ -1,0 +1,15 @@
+.countdown { 
+  width: 140px;
+  height: 140px;
+  background: lightblue;
+  border-radius: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.countdown-display {
+  color: black;
+  font-size: 40px;
+  font-weight: bold;
+}
