@@ -15,9 +15,11 @@ function App() {
   const [count, setCount] = useState(1) 
   const [countdown, setCountdown] = useState(-1)
 
+  // create HTML audio elements we can pass around and play
   const [chime] = useState(new Audio(chimeUrl))
   const [gong] = useState(new Audio(gongUrl))
 
+  // TODO: Add settings panel for these variables
   const maxBreaths = 40
   const maxCountdown = 15
 
@@ -35,17 +37,17 @@ function App() {
   useInterval(() => {
     setCountdown(countdown - 1)
 
-    if ([5, 3, 1].includes(countdown)) {
+    if ([4, 2].includes(countdown)) {
       chime.play()
     }
 
     if (countdown === 0) {
       gong.play()
-      setCount(1)
-      setSession(session + 1)
+      setCount(1) //resets count for breathcounter
+      setSession(session + 1) // increments session
       setShowWhichComponent('breathCounter')
     }
-  }, (countdown < 0) ? null : 1000) //count down every second
+  }, (countdown < 0) ? null : 1000) //count down every second, stops if -1 so interval doesn't go forever
 
 
   const showComponent = (showWhichComponent) => {
@@ -53,7 +55,13 @@ function App() {
       case 'breathCounter': 
         return <BreathCounter count={count} setCount={setCount} maxBreaths={maxBreaths} />
       case 'stopwatch':
-        return <Stopwatch setShowWhichComponent={setShowWhichComponent} setCountdown={setCountdown} maxCountdown={maxCountdown}/>
+        return <Stopwatch 
+            setShowWhichComponent={setShowWhichComponent} 
+            setCountdown={setCountdown} 
+            maxCountdown={maxCountdown}
+            chime={chime}
+            gong={gong}
+          />
       case 'countdown':
         return <Countdown countdown={countdown}/>
       default: 

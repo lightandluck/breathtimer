@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import './Stopwatch.css'
 
+// TODO: Change into functional component
+// TODO: Clean up logic, probably doesn't need to be as complicated, 
+//  because we're not pausing and restarting stopwatch
 class Stopwatch extends Component {
   state = {
     timerOn: false,
@@ -48,6 +51,7 @@ class Stopwatch extends Component {
 
   showNextSteps = () => {
     this.stopTimer()
+    this.props.chime.play()
     this.props.setCountdown(this.props.maxCountdown)
     this.props.setShowWhichComponent('countdown')
   }
@@ -56,6 +60,8 @@ class Stopwatch extends Component {
     const { timerTime } = this.state;
     let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
     let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
+    
+    if (["03", "02", "01"].includes(minutes) && seconds === "00") { this.props.gong.play() }
     
     return (
       <div className="circle stopwatch" onClick={this.showNextSteps}>
