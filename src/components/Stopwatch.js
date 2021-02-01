@@ -36,7 +36,7 @@ class Stopwatch extends Component {
   componentDidMount = () => {
     this.setState({
       timerOn: true,
-      timerTime: this.state.timerTime,
+      timerTime: 0,
       timerStart: Date.now() - this.state.timerTime
     });
     this.timer = setInterval(() => {
@@ -46,24 +46,31 @@ class Stopwatch extends Component {
     }, 10);
   }
 
+  showNextSteps = () => {
+    this.stopTimer()
+    this.props.setCount(1)
+    this.props.setShowWhichComponent('breathCounter')
+  }
+
   render() {
     const { timerTime } = this.state;
-    // let centiseconds = ("0" + (Math.floor(timerTime / 10) % 100)).slice(-2);
     let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
     let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
-    // let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
+    
     return (
-      <div className="stopwatch">
+      <div className="stopwatch" onClick={this.showNextSteps}>
         <p className="stopwatch-display">
           {minutes}:{seconds}
         </p>
 
+        {/* {this.state.timerOn === true && (
+          <button onClick={this.showNextSteps}>Stop</button>
+        )} */}
+
         {/* {this.state.timerOn === false && this.state.timerTime === 0 && (
           <button onClick={this.startTimer}>Start</button>
         )}
-        {this.state.timerOn === true && (
-          <button onClick={this.stopTimer}>Stop</button>
-        )}
+        
         {this.state.timerOn === false && this.state.timerTime > 0 && (
           <button onClick={this.startTimer}>Resume</button>
         )}
@@ -72,6 +79,7 @@ class Stopwatch extends Component {
         )} */}
       </div>
     );
+    
   }
 }
 
