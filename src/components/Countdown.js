@@ -2,7 +2,7 @@ import styles from "./Countdown.module.css";
 
 const Countdown = ({ countdown }) => {
   return (
-    <div className={styles.countdown}>
+    <div className={`${styles.countdown} circle`}>
       <p className={styles.countdownDisplay}>{countdown}</p>
     </div>
   )  

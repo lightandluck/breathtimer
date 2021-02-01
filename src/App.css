@@ -13,6 +13,14 @@
   row-gap: 10px;
 }
 
+.circle { 
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* .App {
   text-align: center;

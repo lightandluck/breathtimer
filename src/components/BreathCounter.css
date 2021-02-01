@@ -1,19 +1,10 @@
-.bubble { 
-  width: 140px;
-  height: 140px;
-  background: lightgreen;
-  border-radius: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .counter {
   font-size: 64px;
   font-weight: bold;
 }
 
-.bubble {
+.breathCounter {
+  background: lightgreen;
   animation-duration: 3500ms;
   animation-name: breath;
   animation-iteration-count: infinite;

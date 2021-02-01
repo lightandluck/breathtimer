@@ -1,12 +1,12 @@
 .stopwatch { 
-  width: 140px;
-  height: 140px;
+  /* width: 140px;
+  height: 140px; */
   background: green;
-  border-radius: 70px;
+  /* border-radius: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; */
 }
 
 .stopwatch-display {

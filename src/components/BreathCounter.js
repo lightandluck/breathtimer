@@ -1,12 +1,12 @@
 import './BreathCounter.css'
 
-const BreathCounter = ({ count }) => {
-  const onClick = () => {
-    console.log('hello')
+const BreathCounter = ({ count, setCount, maxBreaths }) => {
+  const continueToStopwatch = () => {
+    setCount(maxBreaths)
   }
 
   return (
-    <div className="bubble" onClick={onClick}>
+    <div className="circle breathCounter" onClick={continueToStopwatch}>
       <p className="counter">{count}</p>
     </div>
   )  

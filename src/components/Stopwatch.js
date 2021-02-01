@@ -43,13 +43,13 @@ class Stopwatch extends Component {
       this.setState({
         timerTime: Date.now() - this.state.timerStart
       });
-    }, 10);
+    }, 1000);
   }
 
   showNextSteps = () => {
     this.stopTimer()
-    this.props.setCount(1)
-    this.props.setShowWhichComponent('breathCounter')
+    this.props.setCountdown(this.props.maxCountdown)
+    this.props.setShowWhichComponent('countdown')
   }
 
   render() {
@@ -58,7 +58,7 @@ class Stopwatch extends Component {
     let minutes = ("0" + (Math.floor(timerTime / 60000) % 60)).slice(-2);
     
     return (
-      <div className="stopwatch" onClick={this.showNextSteps}>
+      <div className="circle stopwatch" onClick={this.showNextSteps}>
         <p className="stopwatch-display">
           {minutes}:{seconds}
         </p>

@@ -8,11 +8,12 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [showWhichComponent, setShowWhichComponent] = useState('breathCounter')
-  const [round, setRound] = useState(1)
+  const [session, setSession] = useState(1)
   const [count, setCount] = useState(1) 
-  const [countdown, setCountdown] = useState(15)
+  const [countdown, setCountdown] = useState(-1)
 
-  const maxBreaths = 2
+  const maxBreaths = 40
+  const maxCountdown = 15
 
   useInterval(() => {      
     setCount(count + 1);  
@@ -24,9 +25,11 @@ function App() {
   useInterval(() => {
     setCountdown(countdown - 1)
     if (countdown === 0) {
+      setCount(1)
+      setSession(session + 1)
       setShowWhichComponent('breathCounter')
     }
-  }, (countdown === 0) ? null : 1000)
+  }, (countdown < 0) ? null : 1000)
 
   // useEffect(() => {
   //   setCount(1)
@@ -46,9 +49,9 @@ function App() {
   const showComponent = (showWhichComponent) => {
     switch (showWhichComponent) {
       case 'breathCounter': 
-        return <BreathCounter count={count} />
+        return <BreathCounter count={count} setCount={setCount} maxBreaths={maxBreaths} />
       case 'stopwatch':
-        return <Stopwatch setShowWhichComponent={setShowWhichComponent} setCount={setCount}/>
+        return <Stopwatch setShowWhichComponent={setShowWhichComponent} setCountdown={setCountdown} maxCountdown={maxCountdown}/>
       case 'countdown':
         return <Countdown countdown={countdown}/>
       default: 
@@ -59,7 +62,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Round {round}</h1>
+      <h1>Round {session}</h1>
       {showComponent(showWhichComponent)}
     </div>
   );
