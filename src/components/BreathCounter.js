@@ -1,12 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './BreathCounter.css'
 const BreathCounter = () => {
 
-  const [counter, setCounter] = useState(1)
+  const [count, setCount] = useState(1)
+
+  useEffect(() => {
+    let id = setInterval(() => {
+      setCount(count + 1);
+    }, 4000);
+
+    return () => {
+      if (count > 39) {
+        clearInterval(id);
+      }
+    }
+  })
 
   return (
-    <div className="bubble" onClick={(e) => e.target.classList.toggle('collapse')}>
-      <p className="counter" onClick={(e) => e.stopPropagation()}>{counter}</p>
+    <div className="bubble">
+      <p className="counter">{count}</p>
     </div>
   )
 }
