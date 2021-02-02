@@ -44,7 +44,7 @@ function App() {
 
     if (countdown === 0) {
       gong.play()
-      setCount(1) //resets count for breathcounter
+      setCount(0) //resets count for breathcounter
       setSession(session + 1) // increments session
       setShowWhichComponent('breathCounter')
     }
