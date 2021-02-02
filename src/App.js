@@ -10,9 +10,9 @@ import gongUrl from './audio/gong.mp3'
 import { useState } from 'react'
 
 function App() {
-  const [showWhichComponent, setShowWhichComponent] = useState('breathCounter')
+  const [showWhichComponent, setShowWhichComponent] = useState('start')
   const [session, setSession] = useState(1)
-  const [count, setCount] = useState(1) 
+  const [count, setCount] = useState(41) 
   const [countdown, setCountdown] = useState(-1)
 
   // create HTML audio elements we can pass around and play
@@ -20,6 +20,7 @@ function App() {
   const [gong] = useState(new Audio(gongUrl))
 
   // TODO: Add settings panel for these variables
+  // TODO: Save settings in localStorage
   const maxBreaths = 40
   const maxCountdown = 15
 
@@ -49,6 +50,10 @@ function App() {
     }
   }, (countdown < 0) ? null : 1000) //count down every second, stops if -1 so interval doesn't go forever
 
+  const start = () => {
+    setCount(1)
+    setShowWhichComponent('breathCounter')
+  }
 
   const showComponent = (showWhichComponent) => {
     switch (showWhichComponent) {
@@ -65,11 +70,12 @@ function App() {
       case 'countdown':
         return <Countdown countdown={countdown}/>
       default: 
-        return 'Nothing'
+        return <button className="btn" onClick={start}>Start</button>
     }
   }
 
-
+  // TODO: Add final stats
+  // TODO: Add calendar save using IndexedDB
   return (
     <div className="container">
       <h1>Round {session}</h1>
