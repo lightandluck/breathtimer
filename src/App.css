@@ -3,7 +3,6 @@
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
   display: flex;
@@ -20,6 +19,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn {
+  width: 200px;
+  height: 100px;
+  font-size: 60px;
+  border-radius: 15px;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+h3 {
+  text-align: center;
 }
 
 /* .App {

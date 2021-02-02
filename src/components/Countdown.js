@@ -1,10 +1,14 @@
 import styles from "./Countdown.module.css";
+import { Fragment } from 'react'
 
 const Countdown = ({ countdown }) => {
   return (
-    <div className={`${styles.countdown} circle`}>
-      <p className={styles.countdownDisplay}>{countdown}</p>
-    </div>
+    <Fragment>
+      <h3>Inhale. Exhale slowly.</h3>
+      <div className={`${styles.countdown} circle`}>
+        <p className={styles.countdownDisplay}>{countdown}</p>
+      </div>
+    </Fragment>
   )  
 }
 
