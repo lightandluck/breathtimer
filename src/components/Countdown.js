@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 const Countdown = ({ countdown }) => {
   return (
     <Fragment>
-      <h3>Inhale. Exhale slowly.</h3>
+      <h3>Inhale... exhale slowly</h3>
       <div className={`${styles.countdown} circle`}>
         <p className={styles.countdownDisplay}>{countdown}</p>
       </div>
