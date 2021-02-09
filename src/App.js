@@ -10,20 +10,22 @@ import gongUrl from './audio/gong.mp3'
 import { useState } from 'react'
 
 function App() {
-  const [showWhichComponent, setShowWhichComponent] = useState('start')
-  const [session, setSession] = useState(1)
-  const [count, setCount] = useState(41) 
-  const [countdown, setCountdown] = useState(-1)
-
-  // create HTML audio elements we can pass around and play
-  const [chime] = useState(new Audio(chimeUrl))
-  const [gong] = useState(new Audio(gongUrl))
-
   // TODO: Add settings panel for these variables
   // TODO: Save settings in localStorage
   const maxBreaths = 40
   const maxCountdown = 15
 
+  const [showWhichComponent, setShowWhichComponent] = useState('start')
+  const [session, setSession] = useState(1)
+  const [count, setCount] = useState(maxBreaths + 1) 
+  const [countdown, setCountdown] = useState(-1)
+  const [results, setResult] = useState([])
+
+  // create HTML audio elements we can pass around and play
+  const [chime] = useState(new Audio(chimeUrl))
+  const [gong] = useState(new Audio(gongUrl))
+
+  
   // Takes care of breathCounter and next step
   useInterval(() => {      
     setCount(count + 1);  
@@ -38,6 +40,7 @@ function App() {
   useInterval(() => {
     setCountdown(countdown - 1)
 
+    // Small countdown chimes to session is ending soon
     if ([4, 2].includes(countdown)) {
       chime.play()
     }
