@@ -2,7 +2,7 @@ import { useState, Fragment } from 'react';
 import useInterval from '../hooks/useInterval';
 import './Stopwatch.css'
 
-const Stopwatch = ({ gong, chime, setCountdown, setShowWhichComponent, maxCountdown }) => {
+const Stopwatch = ({ gong, chime, setCountdown, setShowWhichComponent, maxCountdown, setResults }) => {
 
   const [timerOn, setTimerOn] = useState(true)
   const [count, setCount] = useState(0)
@@ -21,6 +21,9 @@ const Stopwatch = ({ gong, chime, setCountdown, setShowWhichComponent, maxCountd
 
   const showNextSteps = () => {
     setTimerOn(false)
+    setResults(previousArray => {
+      return [...previousArray, count]
+    })
     chime.play()
     setCountdown(maxCountdown)
     setShowWhichComponent('countdown')

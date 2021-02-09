@@ -2,6 +2,7 @@ import './App.css'
 import BreathCounter from './components/BreathCounter'
 import Stopwatch from './components/Stopwatch'
 import Countdown from './components/Countdown'
+import Result from './components/Result'
 import useInterval from './hooks/useInterval'
 import chimeUrl from './audio/chime.mp3'
 import gongUrl from './audio/gong.mp3'
@@ -17,9 +18,10 @@ function App() {
 
   const [showWhichComponent, setShowWhichComponent] = useState('start')
   const [session, setSession] = useState(1)
-  const [count, setCount] = useState(maxBreaths + 1) 
+  const [breathCount, setBreathCount] = useState(maxBreaths + 1) 
   const [countdown, setCountdown] = useState(-1)
-  const [results, setResult] = useState([])
+  const [results, setResults] = useState([])
+  const [finished, setFinished] = useState(false)
 
   // create HTML audio elements we can pass around and play
   const [chime] = useState(new Audio(chimeUrl))
@@ -28,12 +30,14 @@ function App() {
   
   // Takes care of breathCounter and next step
   useInterval(() => {      
-    setCount(count + 1);  
-    if (count === maxBreaths) {
-      setShowWhichComponent('stopwatch')
-      gong.play()
+    setBreathCount(breathCount + 1);  
+    if (breathCount === maxBreaths) {
+      if (!finished) {
+        setShowWhichComponent('stopwatch')
+        gong.play()
+      }
     }
-  }, (count > maxBreaths) ? null : 3500); // Stops interval after maxBreaths
+  }, (breathCount > maxBreaths) ? null : 3500); // Stops interval after maxBreaths
 
 
   // Takes care of countdown and next step
@@ -45,23 +49,28 @@ function App() {
       chime.play()
     }
 
-    if (countdown === 0) {
+    if ((countdown === 0) && !finished) {
       gong.play()
-      setCount(0) //resets count for breathcounter
+      setBreathCount(0) //resets breathCount for breathcounter
       setSession(session + 1) // increments session
       setShowWhichComponent('breathCounter')
     }
   }, (countdown < 0) ? null : 1000) //count down every second, stops if -1 so interval doesn't go forever
 
-  const start = () => {
-    setCount(1)
+  function handleStart() {
+    setBreathCount(1)
     setShowWhichComponent('breathCounter')
+  }
+
+  function handleFinish() {
+    setFinished(true)
+    setShowWhichComponent('result')
   }
 
   const showComponent = (showWhichComponent) => {
     switch (showWhichComponent) {
       case 'breathCounter': 
-        return <BreathCounter count={count} setCount={setCount} maxBreaths={maxBreaths} />
+        return <BreathCounter breathCount={breathCount} setBreathCount={setBreathCount} maxBreaths={maxBreaths} />
       case 'stopwatch':
         return <Stopwatch 
             setShowWhichComponent={setShowWhichComponent} 
@@ -69,11 +78,14 @@ function App() {
             maxCountdown={maxCountdown}
             chime={chime}
             gong={gong}
+            setResults={setResults}
           />
       case 'countdown':
         return <Countdown countdown={countdown}/>
+      case 'result':
+        return <Result results={results} />
       default: 
-        return <button className="btn" onClick={start}>Start</button>
+        return <button className="btn" onClick={handleStart}>Start</button>
     }
   }
 
@@ -83,6 +95,7 @@ function App() {
     <div className="container">
       <h1>Round {session}</h1>
       {showComponent(showWhichComponent)}
+      <button className="btn" onClick={handleFinish}>Finish</button>
     </div>
   );
 }

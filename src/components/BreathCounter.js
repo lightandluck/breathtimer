@@ -1,15 +1,15 @@
 import './BreathCounter.css'
 import { Fragment } from 'react'
-const BreathCounter = ({ count, setCount, maxBreaths }) => {
+const BreathCounter = ({ breathCount, setBreathCount, maxBreaths }) => {
   const continueToStopwatch = () => {
-    setCount(maxBreaths)
+    setBreathCount(maxBreaths)
   }
 
   return (
     <Fragment>
       <h3>Breathe</h3>
       <div className="circle breathCounter" onClick={continueToStopwatch}>
-        <p className="counter">{count}</p>
+        <p className="counter">{breathCount}</p>
       </div>
     </Fragment>
   )  
