@@ -78,7 +78,7 @@ function App() {
       default:
         return (
           <Fragment>
-            <h1>Get ready to breath</h1>
+            <h1>Get ready to breathe</h1>
             <button className="btn" onClick={handleStart}>
               Start
             </button>
