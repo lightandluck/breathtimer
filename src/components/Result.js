@@ -1,38 +1,77 @@
 import './Result.css'
 
 const Result = ({results}) => {
+  // const mockElapsed = [129, 45, 55, 88, 37];
+  let average;
+  let averageAndElapsed;
+  let stringResults;
+
+  function getTimeString(totalSeconds) {
+    let strSeconds = ("0" + Math.floor(totalSeconds % 60)).slice(-2);
+    let strMinutes = ("0" + (Math.floor(totalSeconds / 60) % 60)).slice(-2);
+    return `${strMinutes}:${strSeconds}`
+  }
+
+  if (results.length) {
+    average = Math.floor((results.reduce((a, b) => a + b)) / results.length);
+    averageAndElapsed = [average, ...results];
+    stringResults = averageAndElapsed.map((value, index) => {
+      return {
+        round: (index === 0) ? "Average" : index,
+        elapsedTimeString: getTimeString(value)
+      }
+    });
+  } else {
+    stringResults = [{
+      round: "No data",
+      elapsedTimeString: "0:00",
+    }]
+  }
+
   return (
     <div className="result">
       <h1>Results</h1>
-      {/* {results.map(item => <p>{item}</p>)} */}
       <table>
-        <tr>
-          <td>Average</td>  
-          <td>1:04</td>
-        </tr>
-        <tr>
-          <td>Round 1</td>
-          <td>0:59</td>
-        </tr>
-        <tr>
-          <td>Round 2</td>
-          <td>1:59</td>
-        </tr>
-        <tr>
-          <td>Round 3</td>
-          <td>0:53</td>
-        </tr>
-        <tr>
-          <td>Round 4</td>
-          <td>1:29</td>
-        </tr>
-        <tr>
-          <td>Round 5 </td>
-          <td>1:59</td>
-        </tr>
+        <tbody>
+          {stringResults.map((item, index) => {
+            return (
+              <tr key={index+item}>
+                <td>{(typeof item.round === 'string') ? item.round : `Round ${item.round}`}</td>
+                <td>{item.elapsedTimeString}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
     </div>
   )
 }
 
 export default Result
+
+// const mockResults = [
+//   {
+//     round: "Average",
+//     elapsedTimeString: "1:12"
+//   },
+//   {
+//     round: "1",
+//     elapsedTimeString: "1:01"
+//   },
+//   {
+//     round: "2",
+//     elapsedTimeString: "0:35"
+//   },
+//   {
+//     round: "3",
+//     elapsedTimeString: "0:55"
+//   },
+//   {
+//     round: "4",
+//     elapsedTimeString: "1:03"
+//   },
+//   {
+//     round: "5",
+//     elapsedTimeString: "0:44"
+//   }
+// ]

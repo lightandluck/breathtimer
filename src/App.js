@@ -19,6 +19,8 @@ function App() {
   const [round, setRound] = useState(1);
   const [breathCount, setBreathCount] = useState(maxBreaths + 1);
   const [countdown, setCountdown] = useState(-1);
+
+  // Result is array of numbers representing seconds elapsed for each round. Ex: [129, 45, 55, 88]
   const [results, setResults] = useState([]);
   const [finished, setFinished] = useState(true);
 
@@ -28,6 +30,8 @@ function App() {
 
   function handleStart() {
     setBreathCount(1);
+    setRound(1);
+    setResults([])
     setFinished(false);
     setShowWhichComponent("breathCounter");
   }
