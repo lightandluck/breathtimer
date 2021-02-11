@@ -16,7 +16,7 @@ function App() {
 
   // Application state
   const [showWhichComponent, setShowWhichComponent] = useState("start");
-  const [session, setSession] = useState(1);
+  const [round, setRound] = useState(1);
   const [breathCount, setBreathCount] = useState(maxBreaths + 1);
   const [countdown, setCountdown] = useState(-1);
   const [results, setResults] = useState([]);
@@ -86,7 +86,7 @@ function App() {
   // Takes care of breathCounter and continuing to stopwatch
   useInterval(
     () => {
-      setBreathCount(breathCount + 1);
+      setBreathCount(breathCount + 1); // tick up breathCounter
       if (breathCount === maxBreaths) {
         if (!finished) {
           gong.play();
@@ -100,9 +100,9 @@ function App() {
   // Takes care of countdown and continuing to breathCounter
   useInterval(
     () => {
-      setCountdown(countdown - 1);
+      setCountdown(countdown - 1); //tick down countdown
 
-      // Small countdown chimes to session is ending soon
+      // Small countdown chimes to round is ending soon
       if ([4, 2].includes(countdown)) {
         chime.play();
       }
@@ -110,7 +110,7 @@ function App() {
       if (countdown === 0 && !finished) {
         gong.play();
         setBreathCount(0); //resets breathCount for breathcounter
-        setSession(session + 1); // increments session
+        setRound(round + 1); // increments round
         setShowWhichComponent("breathCounter");
       }
     },
@@ -121,7 +121,7 @@ function App() {
   // TODO: Add calendar save using IndexedDB
   return (
     <div className="container">
-      {(!finished) ? <h1>Round {session}</h1> : null }
+      {(!finished) ? <h1>Round {round}</h1> : null }
       {showComponent(showWhichComponent)}
       {(!finished) ? <button className="btn" onClick={handleFinish}>Finish</button> : null}
     </div>

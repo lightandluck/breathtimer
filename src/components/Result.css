@@ -1,0 +1,17 @@
+.result {
+  display: flex;
+  flex-direction: column;
+}
+
+.result h1 {
+  text-align: center;
+}
+
+.result ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+tr td:first-child {
+  padding-right: 60px;
+}

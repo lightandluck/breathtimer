@@ -21,8 +21,8 @@ const Stopwatch = ({ gong, chime, setCountdown, setShowWhichComponent, maxCountd
 
   const showNextSteps = () => {
     setTimerOn(false)
-    setResults(previousArray => {
-      return [...previousArray, count]
+    setResults(previousResult => {
+      return [...previousResult, count]
     })
     chime.play()
     setCountdown(maxCountdown)
