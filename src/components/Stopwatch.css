@@ -1,16 +1,8 @@
 .stopwatch { 
-  /* width: 140px;
-  height: 140px; */
-  background: green;
-  /* border-radius: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; */
+  background: #1daa39;
 }
 
 .stopwatch-display {
   color: white;
   letter-spacing: -6px;
-  /* font-size: 60px; */
 }

@@ -1,15 +1,11 @@
 import styles from "./Countdown.module.css";
 import { Fragment } from 'react'
 
-const styleCountdown = {
-  backgroundColor: 'lightblue'
-}
-
 const Countdown = ({ countdown }) => {
   return (
     <Fragment>
       <h3>Inhale... exhale slowly</h3>
-      <div className="circle" style={styleCountdown}>
+      <div className={`circle ${styles.countdown}`}>
         <p className={styles.countdownDisplay}>{countdown}</p>
       </div>
     </Fragment>

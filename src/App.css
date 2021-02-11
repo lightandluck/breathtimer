@@ -1,33 +1,36 @@
 .container {
-  max-width: 600px;
-  margin: 30px auto;
-  overflow: auto;
-  min-height: 300px;
-  padding: 30px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5em;
+  justify-content: center;
   row-gap: 10px;
+  margin: 0 auto;
+  min-height: 300px;
+  overflow: auto;
 }
 
 .circle { 
-  width: 300px;
-  height: 300px;
+  align-items: center;
   border-radius: 200px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 100px;
   font-weight: bold;
+  height: 300px;
+  justify-content: center;
+  margin: 2rem;
+  width: 300px;
 }
 
 .btn {
-  width: 200px;
-  height: 100px;
   font-size: 60px;
   border-radius: 15px;
+  padding: 0.6rem 2rem 0.4rem 2rem;
+  color: #000;
+  background: #f4f961;
+  text-transform: uppercase;
+  font-family: "Trebuchet MS";
+  font-weight: bold;
 }
 
 h1 {
@@ -35,6 +38,7 @@ h1 {
 }
 
 h3 {
+  margin: 0;
   text-align: center;
 }
 

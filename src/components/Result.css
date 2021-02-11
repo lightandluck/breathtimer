@@ -5,7 +5,9 @@
 }
 
 .result h1 {
+  font-family: Trebuchet MS;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .result ul {
