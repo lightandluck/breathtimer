@@ -2,10 +2,12 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  font-family: 'Trebuchet MS';
   font-size: 1.2em;
   justify-content: center;
   margin: 0 auto;
   min-height: 300px;
+  max-width: 20rem;
   overflow: auto;
   padding: 0 1rem;
   row-gap: 10px;
@@ -15,6 +17,7 @@
   align-items: center;
   border-radius: 200px;
   display: flex;
+  font-family: monospace;
   font-size: 100px;
   font-weight: bold;
   height: 300px;
@@ -24,14 +27,16 @@
 }
 
 .btn {
-  font-size: 60px;
-  border-radius: 15px;
-  padding: 0.6rem 2rem 0.4rem 2rem;
-  color: #000;
   background: #f4f961;
-  text-transform: uppercase;
+  border-radius: 15px;
+  color: #000;
   font-family: "Trebuchet MS";
+  font-size: 60px;
   font-weight: bold;
+  max-width: 20rem;
+  padding: 0.6rem 2rem 0.4rem 2rem;
+  text-transform: uppercase;
+  width: 100%;
 }
 
 h1 {
@@ -43,6 +48,30 @@ h3 {
   margin: 0;
   text-align: center;
 }
+
+
+body {
+background: #313131;
+color: white;
+}
+
+.circle {
+  color: #313131;
+}
+
+tr:first-child {
+  color: #313131;
+}
+
+tr td {
+  border-bottom: 2px solid white;
+}
+
+.btn {
+  color: #313131;
+}
+
+
 
 /* .App {
   text-align: center;
