@@ -33,10 +33,9 @@
   font-family: "Trebuchet MS";
   font-size: 60px;
   font-weight: bold;
-  max-width: 20rem;
   padding: 0.6rem 2rem 0.4rem 2rem;
   text-transform: uppercase;
-  width: 100%;
+  width: 20rem;
 }
 
 h1 {
