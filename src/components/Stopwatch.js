@@ -1,6 +1,6 @@
 import { useState, Fragment } from 'react';
 import useInterval from '../hooks/useInterval';
-import './Stopwatch.css'
+import classes from './Stopwatch.module.css'
 
 const Stopwatch = ({ gong, chime, setCountdown, setShowWhichComponent, maxCountdown, setResults }) => {
 
@@ -19,7 +19,18 @@ const Stopwatch = ({ gong, chime, setCountdown, setShowWhichComponent, maxCountd
     }
   }, timerOn ? 1000 : null)
 
-  const showNextSteps = () => {
+  return (
+    <Fragment>
+      <h3>Exhale and hold</h3>
+      <div className={`circle ${classes.stopwatch}`} onClick={showNextSteps}>
+        <p className={classes.stopwatchDisplay}>
+          {minutes}:{seconds}
+        </p>
+      </div>
+    </Fragment>
+  )
+
+  function showNextSteps() {
     setTimerOn(false)
     setResults(previousResult => {
       return [...previousResult, count]
@@ -28,17 +39,6 @@ const Stopwatch = ({ gong, chime, setCountdown, setShowWhichComponent, maxCountd
     setCountdown(maxCountdown)
     setShowWhichComponent('countdown')
   }
-
-  return (
-    <Fragment>
-      <h3>Exhale and hold</h3>
-      <div className="circle stopwatch" onClick={showNextSteps}>
-        <p className="stopwatch-display">
-          {minutes}:{seconds}
-        </p>
-      </div>
-    </Fragment>
-  )
 }
 
 export default Stopwatch;
