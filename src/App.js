@@ -1,12 +1,13 @@
-import "./App.css";
-import { useState, Fragment } from "react";
-import BreathCounter from "./components/BreathCounter";
-import Stopwatch from "./components/Stopwatch";
-import Countdown from "./components/Countdown";
-import Result from "./components/Result";
-import useInterval from "./hooks/useInterval";
-import chimeUrl from "./audio/chime.mp3";
-import gongUrl from "./audio/gong.mp3";
+import './App.css';
+import { useState, Fragment } from 'react';
+import BreathCounter from './components/BreathCounter';
+import Stopwatch from './components/Stopwatch';
+import Countdown from './components/Countdown';
+import Result from './components/Result';
+import useInterval from './hooks/useInterval';
+import chimeUrl from './audio/chime.mp3';
+import gongUrl from './audio/gong.mp3';
+import Modal from './components/Modal/Modal';
 
 function App() {
   // TODO: Add settings panel for these variables
@@ -15,7 +16,7 @@ function App() {
   const maxCountdown = 15;
 
   // Application state
-  const [showWhichComponent, setShowWhichComponent] = useState("start");
+  const [showWhichComponent, setShowWhichComponent] = useState('start');
   const [round, setRound] = useState(1);
   const [breathCount, setBreathCount] = useState(maxBreaths + 1);
   const [countdown, setCountdown] = useState(-1);
@@ -28,64 +29,9 @@ function App() {
   const [chime] = useState(new Audio(chimeUrl));
   const [gong] = useState(new Audio(gongUrl));
 
-  function handleStart() {
-    setBreathCount(1);
-    setRound(1);
-    setResults([])
-    setFinished(false);
-    setShowWhichComponent("breathCounter");
-  }
+  const [showModal, setShowModal] = useState(false);
 
-  function handleFinish() {
-    setCountdown(-1);
-    setBreathCount(maxBreaths + 1)
-    setFinished(true);
-    setShowWhichComponent("result");
-  }
-
-  function showComponent(showWhichComponent) {
-    switch (showWhichComponent) {
-      case "breathCounter":
-        return (
-          <BreathCounter
-            breathCount={breathCount}
-            maxBreaths={maxBreaths}
-            setBreathCount={setBreathCount}
-          />
-        );
-      case "stopwatch":
-        return (
-          <Stopwatch
-            setShowWhichComponent={setShowWhichComponent}
-            setCountdown={setCountdown}
-            maxCountdown={maxCountdown}
-            chime={chime}
-            gong={gong}
-            setResults={setResults}
-          />
-        );
-      case "countdown":
-        return <Countdown countdown={countdown} />;
-      case "result":
-        return (
-          <Fragment>
-            <Result results={results} />
-            <button className="btn" onClick={handleStart}>
-              Start
-            </button>
-          </Fragment>
-        );
-      default:
-        return (
-          <Fragment>
-            <h1>Get ready to breathe</h1>
-            <button className="btn" onClick={handleStart}>
-              Start
-            </button>
-          </Fragment>
-        );
-    }
-  }
+  
 
   // Takes care of breathCounter and continuing to stopwatch
   useInterval(
@@ -94,7 +40,7 @@ function App() {
       if (breathCount === maxBreaths) {
         if (!finished) {
           gong.play();
-          setShowWhichComponent("stopwatch");
+          setShowWhichComponent('stopwatch');
         }
       }
     },
@@ -115,21 +61,89 @@ function App() {
         gong.play();
         setBreathCount(0); //resets breathCount for breathcounter
         setRound(round + 1); // increments round
-        setShowWhichComponent("breathCounter");
+        setShowWhichComponent('breathCounter');
       }
     },
     countdown < 0 ? null : 1000
   ); //count down every second, stops if -1 so interval doesn't go forever
 
-  // TODO: Add final stats
   // TODO: Add calendar save using IndexedDB
   return (
-    <div className="container">
+    <div className='container'>
       {(!finished) ? <h1>Round {round}</h1> : null }
       {showComponent(showWhichComponent)}
-      {(!finished) ? <button className="btn" onClick={handleFinish}>Finish</button> : null}
+      {(!finished) ? <button className='btn' onClick={handleFinish}>Finish</button> : null}
+      {/* <button className='btn' onClick={handleShowModal}>Show Modal</button>
+      <Modal show={showModal} handleModalDismiss={handleModalDismiss}><h1>Hello there!</h1></Modal> */}
     </div>
   );
+  
+  // function handleShowModal () {
+  //   setShowModal(true);
+  // }
+
+  // function handleModalDismiss () {
+  //   setShowModal(false);
+  // }
+
+  function handleStart() {
+    setBreathCount(1);
+    setRound(1);
+    setResults([])
+    setFinished(false);
+    setShowWhichComponent('breathCounter');
+  }
+
+  function handleFinish() {
+    setCountdown(-1);
+    setBreathCount(maxBreaths + 1)
+    setFinished(true);
+    setShowWhichComponent('result');
+  }
+
+  function showComponent(showWhichComponent) {
+    switch (showWhichComponent) {
+      case 'breathCounter':
+        return (
+          <BreathCounter
+            breathCount={breathCount}
+            maxBreaths={maxBreaths}
+            setBreathCount={setBreathCount}
+          />
+        );
+      case 'stopwatch':
+        return (
+          <Stopwatch
+            setShowWhichComponent={setShowWhichComponent}
+            setCountdown={setCountdown}
+            maxCountdown={maxCountdown}
+            chime={chime}
+            gong={gong}
+            setResults={setResults}
+          />
+        );
+      case 'countdown':
+        return <Countdown countdown={countdown} />;
+      case 'result':
+        return (
+          <Fragment>
+            <Result results={results} />
+            <button className='btn' onClick={handleStart}>
+              Start
+            </button>
+          </Fragment>
+        );
+      default:
+        return (
+          <Fragment>
+            <h1>Get ready to breathe</h1>
+            <button className='btn' onClick={handleStart}>
+              Start
+            </button>
+          </Fragment>
+        );
+    }
+  }
 }
 
 export default App;
